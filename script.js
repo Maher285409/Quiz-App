@@ -211,7 +211,7 @@ const restart = () => {
 
 const handleShowResults = () => {
   scoreText.innerHTML = `<span
-          >and nice 😎, You got
+          >Amazing!!🎉, You got
           <p>${userScore}</p>
           out of
           <p>${questions?.length}</p></span
