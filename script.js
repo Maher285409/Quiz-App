@@ -23,6 +23,21 @@ let currentQuestionIndex = 0;
 
 let timeLineInterval = null;
 let progressBarInterval = null;
+
+// Function to set the actual viewport height as a CSS variable
+const setViewportHeight = () => {
+  // Get the viewport height (excluding browser toolbars)
+  let vh = window.innerHeight * 0.01;
+
+  // Set the value on the document's root (<html>)
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+};
+
+// Call the function initially
+setViewportHeight();
+
+// Re-calculate the height whenever the browser is resized (e.g., address bar hides)
+window.addEventListener("resize", setViewportHeight);
 const TickIcon = `<div class="icon tick">
     <i class="fa-solid fa-check"></i>
   </div>`;
@@ -35,13 +50,13 @@ console.log(startBtn);
 startBtn.addEventListener("click", () => {
   // we have to inject a class name to info box
   infoBox.classList.add("activeInfoBox");
-  startBtn.style.display = 'none';
+  startBtn.style.display = "none";
 });
 
 exitBtn.addEventListener("click", () => {
   infoBox.classList.remove("activeInfoBox");
 
-  startBtn.style.display = 'block';
+  startBtn.style.display = "block";
 });
 
 continueBtn.addEventListener("click", () => {
@@ -51,7 +66,7 @@ continueBtn.addEventListener("click", () => {
   showQuestion(currentQuestionIndex);
   handleTiming(15);
   handleProgressBar();
-  timeLineTitle.innerText = 'Time Left';
+  timeLineTitle.innerText = "Time Left";
 });
 
 nextBtn.addEventListener("click", () => {
@@ -63,36 +78,35 @@ nextBtn.addEventListener("click", () => {
     handleProgressBar();
     showQuestion(currentQuestionIndex);
     nextBtn.classList.remove("active");
-    timeLineTitle.innerText = 'Time Left';
-  }
-  else {
+    timeLineTitle.innerText = "Time Left";
+  } else {
     //you reached the last question
     //you need to show result
     clearInterval(progressBarInterval);
     clearInterval(timeLineInterval);
-    quizBox.classList.remove('activeQuizBox');
-    resultBox.classList.add('activeResultBox');
+    quizBox.classList.remove("activeQuizBox");
+    resultBox.classList.add("activeResultBox");
     handleShowResults();
   }
 });
 
-quitQuiz.addEventListener('click', ()=>{
+quitQuiz.addEventListener("click", () => {
   restart();
-  resultBox.classList.remove('activeResultBox');
+  resultBox.classList.remove("activeResultBox");
 
   if (startBtn) {
-    startBtn.style.display = 'block';
+    startBtn.style.display = "block";
   }
 });
 
-replayQuiz.addEventListener('click', ()=> {
+replayQuiz.addEventListener("click", () => {
   restart();
-  resultBox.classList.remove('activeResultBox');
+  resultBox.classList.remove("activeResultBox");
   quizBox.classList.add("activeQuizBox");
   showQuestion(currentQuestionIndex);
   handleTiming(15);
   handleProgressBar();
-  timeLineTitle.innerText = 'Time Left';
+  timeLineTitle.innerText = "Time Left";
 });
 
 // function to show/render questions
@@ -129,17 +143,14 @@ const handleTiming = (time) => {
 
     if (timeValue === 0) {
       // you cross the time
-      timeLineTitle.innerText = 'Time Off';
+      timeLineTitle.innerText = "Time Off";
       clearInterval(timeLineInterval);
       nextBtn.classList.add("active");
       const correctAnswer = questions[currentQuestionIndex].answer;
       for (let i = 0; i < allOptions?.length; i++) {
         allOptions[i].classList.add("disabled");
 
-        if (
-          
-          allOptions[i].innerText === correctAnswer
-        ) {
+        if (allOptions[i].innerText === correctAnswer) {
           allOptions[i].classList.add("correct");
           allOptions[i].insertAdjacentHTML("beforeend", TickIcon);
         }
@@ -160,8 +171,6 @@ const handleProgressBar = () => {
     }
   }, 10);
 };
-
-
 
 const optionClickHandler = (e) => {
   clearInterval(progressBarInterval);
@@ -192,18 +201,16 @@ const optionClickHandler = (e) => {
   }
 };
 
-const restart =()=> {
+const restart = () => {
   clearInterval(progressBarInterval);
   clearInterval(timeLineInterval);
   userScore = 0;
   currentQuestionIndex = 0;
-  timeLineTitle.innerText = 'Time Left';
-}
+  timeLineTitle.innerText = "Time Left";
+};
 
-const handleShowResults=()=>{
-
-  scoreText.innerHTML=
-        `<span
+const handleShowResults = () => {
+  scoreText.innerHTML = `<span
           >and nice 😎, You got
           <p>${userScore}</p>
           out of
