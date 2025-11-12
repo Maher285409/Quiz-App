@@ -62,22 +62,40 @@ body {
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
 }
+/* Target the button inside the start container */
+/* Target the button inside the start container */
+/* Target the button inside the start container (adjust selector if needed) */
 .startButton button {
-  font-size: 25px;
+  /* --- Glass Look --- */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.35
+  ); /* Subtle, slightly opaque glass */
+  backdrop-filter: blur(4px); /* Light haze effect */
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Clean, light glass reflection border */
+
+  /* --- Minimal Glow/Lift (Reduced from before) --- */
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2),
+    /* Very subtle white inner glow */ 0 3px 8px rgba(0, 0, 0, 0.3); /* Clean, small lift shadow */
+
+  /* --- Typography and Structure --- */
+  color: #ffffff;
+  font-size: 18px; /* Slightly smaller for better mobile fit */
   font-weight: 600;
-  color: #fff;
-  padding: 15px 40px;
-  outline: none;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #0a66c2, #004182); /* Blue Gradient */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 10px 25px; /* Reduced padding for smaller screens */
+  border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
+/* --- Hover/Active State --- */
 .startButton button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  background-color: rgba(255, 255, 255, 0.45); /* Highlight on hover */
+  transform: translateY(-1px); /* Very subtle lift */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4),
+    /* Subtle increase in glow */ 0 5px 10px rgba(0, 0, 0, 0.4);
 }
 
 /* 4. Info Box Styling */
@@ -445,6 +463,13 @@ body {
      * This ensures content doesn't hit the edges and stays centered visually 
      * within the reduced space.
      */
+    .startButton {
+      position: absolute; /* or fixed */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      /* No fixed width, let the button size determine the container width */
+    }
     .quiz-box .quiz-content-section,
     .quiz-box .quiz-footer-section,
     .quiz-box .quiz-header-section .quiz-titleContainer {
@@ -572,6 +597,13 @@ body {
 
   /* Tweak Timeline container for spacing */
   @media (max-width: 400px) {
+    .startButton {
+      position: absolute; /* or fixed */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      /* No fixed width, let the button size determine the container width */
+    }
     /* ... (Existing full-screen fixes and padding reductions) ... */
 
     /* Timeline container FIXES */
