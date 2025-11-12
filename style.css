@@ -1,3 +1,4 @@
+/* Universal Reset */
 * {
   padding: 0;
   margin: 0;
@@ -5,403 +6,571 @@
   font-family: "Poppins", sans-serif;
 }
 
+/* 1. Overall Background (LinkedIn Blue Gradient) */
 body {
-  background-color: #001D39;
+  /* Set up main page background with blue gradient and center alignment for boxes */
+  background: linear-gradient(135deg, #0a66c2, #004182);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  color: #000; /* Default text color */
+}
 
-  .startButton {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-    border-radius: 5px;
-    button {
-      font-size: 25px;
-      font-weight: 500;
-      color: #fff;
-      padding: 15px 30px;
-      outline: none;
-      border: none;
-      border-radius: 5px;
-      background: #B3cFE5;
-      cursor: pointer;
-    }
-  }
+/* 2. Glassy Containers (Info, Quiz, Result Boxes) */
+.infoBox,
+.quiz-box,
+.result-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 90%;
+  max-width: 550px; /* Use 550px for all max-widths based on your quiz-box */
 
-  .infoBox {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-    width: 540px;
-    background: #ffffff;
-    border-radius: 5px;
-    transform: translate(-50%, -50%) scale(0.9);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3ease;
-    /* we require this properties only when start button is clicked */
-    /* opacity: 1;
-    z-index: 5;
-    pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1); */
+  /* Glassmorphism Effect */
+  background: rgba(255, 255, 255, 0.1); /* Transparent white */
+  backdrop-filter: blur(12px); /* Glass blur */
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff; /* Default text color inside the boxes */
 
-    .info-box-title {
-      height: 60px;
-      width: 100%;
-      border-bottom: 1px solid lightgrey;
-      display: flex;
-      align-items: center;
-      padding: 0 30px;
-      border-radius: 5px 5px 0 0;
-      font-size: 20px;
-      font-weight: 600;
-    }
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
 
-    .info-list {
-      padding: 15px 30px;
+/* Active State for all boxes */
+.infoBox.activeInfoBox,
+.quiz-box.activeQuizBox,
+.result-box.activeResultBox {
+  opacity: 1;
+  z-index: 5;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
 
-      .info-row {
-        margin: 5px 0;
-        font-size: 17px;
-      }
-    }
+/* 3. Start Button Styling (LinkedIn Primary Button Style) */
+.startButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+.startButton button {
+  font-size: 25px;
+  font-weight: 600;
+  color: #fff;
+  padding: 15px 40px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #0a66c2, #004182); /* Blue Gradient */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.startButton button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
 
-    .footer {
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 0 30px;
-      border-top: 1px solif lightgrey;
+/* 4. Info Box Styling */
+.infoBox {
+  max-width: 540px; /* Keeping original InfoBox max-width */
+}
+.infoBox .info-box-title {
+  height: 60px;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  border-radius: 10px 10px 0 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff; /* White title text */
+  background: rgba(10, 102, 194, 0.3); /* Semi-transparent blue header */
+}
+.infoBox .info-list {
+  padding: 15px 30px;
+  color: #ffffff;
+}
+.infoBox .info-list .info-row {
+  margin: 5px 0;
+  font-size: 17px;
+}
+.infoBox .footer {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.infoBox .footer button {
+  margin: 0 5px;
+  height: 40px;
+  width: 100px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+/* Replaced nested button styles with explicit class styles */
+.infoBox .footer .exitBtn {
+  border: 2px solid #ffffff; /* White border */
+    color: #ffffff;             /* White text */
+    background: transparent;
+}
+.infoBox .footer .continueBtn {
+  border: 1px solid #0a66c2; /* Solid border for contrast */
+  color: #fff;
+  background: #0a66c2; /* Solid blue for primary action */
+}
+.infoBox .footer .exitBtn:hover {
+  color: #0A66C2; /* Dark blue text on hover */
+    background-color: #ffffff;
+}
 
-      .exitBtn {
-        margin: 0 5px;
-        height: 40px;
-        width: 100px;
-        font-size: 16px;
-        font-weight: 500;
-        cursor: pointer;
-        border: none;
-        outline: none;
-        border-radius: 5px;
-        border: 1px solid #0A1931;
-        transition: all 0.3sease;
-        color: #1A3D63;
-        background: #fff;
-      }
-      button {
-        margin: 0 5px;
-        height: 40px;
-        width: 100px;
-        font-size: 16px;
-        font-weight: 500;
-        cursor: pointer;
-        border: none;
-        outline: none;
-        border-radius: 5px;
-        border: 1px solid #0A1931;
-        transition: all 0.3sease;
-        color: #fff;
-        background: #4A7FA7;
-      }
-      .exitBtn:hover {
-        color: #fff;
-        background-color: #B3cFE5;
-      }
-      .continueBtn {
-        color: #fff;
-        background: #B3cFE5;
-      }
-    }
-  }
+/* 5. Quiz Box Styling */
+.quiz-box .quiz-header-section {
+  display: flex;
+  flex-direction: column;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px 10px 0 0;
+  box-shadow: none; /* Removed internal box shadow */
+}
+.quiz-box .quiz-header-section .quiz-titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 0 30px;
+}
+.quiz-box .quiz-titleContainer .quiz-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+}
+.quiz-box .quiz-titleContainer .timelineContainer {
+  display: flex;
+  align-items: center;
+  color: #ffffff; /* White text for timeline container */
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  height: 40px; /* Adjusted height */
+  padding: 0 8px;
+  border-radius: 5px;
+  justify-content: space-between;
+  width: 145px;
+  white-space: nowrap;
+}
+.quiz-box .quiz-titleContainer .timelineContainer .time-line-title {
+  font-weight: 500; /* Increased weight for visibility */
+  font-size: 16px;
+  user-select: none;
+}
+.quiz-box .quiz-titleContainer .timelineContainer .timeline {
+  font-size: 18px;
+  font-weight: 600;
+  height: 30px;
+  width: 40px; /* Adjusted width */
+  color: #fff;
+  border-radius: 5px;
+  line-height: 30px;
+  text-align: center;
+  background: #0a66c2; /* LinkedIn blue accent */
+  border: none;
+  user-select: none;
+}
+.quiz-box .progressBar {
+  height: 3px;
+  width: 0%;
+  background: #ffd700; /* Gold/Yellow for visibility (like an HR bar) */
+  transition: all 0.3s linear; /* Changed ease to linear for bar movement */
+}
+.quiz-box .quiz-content-section {
+  padding: 25px 30px 20px 30px;
+  background: transparent; /* Make content section transparent for glass effect */
+  display: flex;
+  flex-direction: column;
+}
+.quiz-box .quiz-content-section .questionText {
+  font-size: 25px;
+  font-weight: 600;
+  color: #ffffff;
+}
+.quiz-box .quiz-content-section .options-list-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0px;
+}
+.quiz-box .options-list-container .options {
+  background: rgba(255, 255, 255, 0.15); /* Lighter transparent */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
+  border-radius: 8px;
+  padding: 12px 15px; /* Adjusted padding */
+  font-size: 17px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #ffffff; /* White text for options */
+}
+.quiz-box .options-list-container .options:hover:not(.disabled) {
+  background: rgba(255, 255, 255, 0.25); /* Slightly darker hover */
+}
+/* Feedback Colors */
+.quiz-box .options.correct {
+  color: #2ecc71;
+  background: rgba(46, 204, 113, 0.3);
+  border: 1px solid rgba(46, 204, 113, 0.5);
+}
+.quiz-box .options.incorrect {
+  color: #e74c3c;
+  background: rgba(231, 76, 60, 0.3);
+  border: 1px solid rgba(231, 76, 60, 0.5);
+}
+.quiz-box .options .icon {
+  height: 26px;
+  width: 26px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 13px;
+  pointer-events: none;
+  line-height: 24px;
+  margin-left: 10px; /* Added margin */
+  display: none; /* Hide icons by default */
+}
+.quiz-box .options.correct .icon,
+.quiz-box .options.incorrect .icon {
+  display: block;
+}
+.quiz-box .options .icon.tick {
+  color: #2ecc71;
+  border-color: #2ecc71;
+  background: rgba(46, 204, 113, 0.1);
+}
+.quiz-box .options .icon.cross {
+  color: #e74c3c;
+  border-color: #e74c3c;
+  background: rgba(231, 76, 60, 0.1);
+}
+.quiz-box .options.disabled {
+  pointer-events: none;
+}
+.quiz-box .quiz-footer-section {
+  height: 60px;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.quiz-box .quiz-footer-section .quiz-footer-text {
+  color: #ddd;
+}
+.quiz-box .quiz-footer-text .highlighted-text {
+  font-weight: 600; /* Increased weight */
+  padding: 0 5px;
+  color: #ffffff;
+}
+.quiz-box .quiz-footer-section .nextBtn {
+  height: 40px;
+  padding: 0 20px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: #fff;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #0a66c2, #004182);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  line-height: 1; /* Fixed line-height issue */
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+  transition: all 0.3s ease;
+}
+.quiz-box .quiz-footer-section .nextBtn.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
 
-  .infoBox.activeInfoBox {
-    /* we require this properties only when start button is clicked */
-    opacity: 1;
-    z-index: 5;
-    pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1);
-  }
+/* 6. Result Box Styling */
+.result-box {
+  text-align: center;
+  padding: 30px; /* Increased padding */
+  max-width: 450px;
+}
+.result-box .crownIcon {
+  font-weight: 900;
+  font-size: 100px;
+  color: #f3aa20;
+}
+.result-box .completedText {
+  font-size: 22px; /* Increased size */
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 10px;
+}
+.result-box .score_text span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+}
+.result-box .score_text p {
+  padding: 0 4px;
+  font-weight: 600;
+  color: #74c0ff; /* Lighter blue for score contrast */
+}
+.result-box .result-box-buttons-container {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0 0;
+}
+.result-box .result-box-buttons-container button {
+  margin: 0 10px;
+  height: 45px;
+  padding: 0 20px;
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.result-box .result-box-buttons-container .replay_Quiz {
+  color: #fff;
+  background: linear-gradient(135deg, #0a66c2, #004182);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+.result-box .result-box-buttons-container .quit {
+  color: #ffffff;
+  background: transparent;
+  border: 2px solid #0a66c2;
+}
 
-  .quiz-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 550px;
-    background: #ffffff;
-    border-radius: 5px;
-    transform: translate(-50%, -50%) scale(0.9);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
+/* 7. Mobile Responsiveness Fixes */
 
-    .quiz-header-section {
-      display: flex;
-      flex-direction: column;
-      height: 70px;
-
-      background: #ffffff;
-      border-radius: 5px 5px 0 0;
-      box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.1);
-
-      .quiz-titleContainer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 70px;
-        padding: 0 30px;
-
-        .quiz-title {
-          font-size: 20px;
-          font-weight: 600;
-        }
-
-        .timelineContainer {
-          display: flex;
-          align-items: center;
-          color: #004085;
-          background: #cce5ff;
-          border: 1px solid #b8daff;
-          height: 45px;
-          padding: 0 8px;
-          border-radius: 5px;
-          justify-content: space-between;
-          width: 145px;
-
-          .time-line-title {
-            font-weight: 400;
-            font-size: 17px;
-            user-select: none;
-          }
-
-          .timeline {
-            font-size: 18px;
-            font-weight: 500;
-            height: 30px;
-            width: 45px;
-            color: #fff;
-            border-radius: 5px;
-            line-height: 30px;
-            text-align: center;
-            background: #343a40;
-            border: 1px solid #343a40;
-            user-select: none;
-          }
-        }
-      }
-
-      .progressBar {
-        height: 3px;
-        width: 0%;
-        background: #A33757;
-        transition: all 0.5 ease;
-      }
-    }
-
-    .quiz-content-section {
-      padding: 25px 30px 20px 30px;
-      background: #ffffff;
-      display: flex;
-      flex-direction: column;
-
-      .questionText {
-        font-size: 25px;
-        font-weight: 600;
-      }
-
-      .options-list-container {
-        display: flex;
-        flex-direction: column;
-        padding: 20px 0px;
-
-        .options {
-          background: aliceblue;
-          border: 1px solid #0A1931;
-          border-radius: 5px;
-          padding: 8px 15px;
-          font-size: 17px;
-          margin-bottom: 15px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-        .options.correct {
-          color: #155724;
-          background: #d4edda;
-          border: 1px solid #c3e6cb;
-        }
-        .options.incorrect {
-          color: #721c24;
-          background: #f8d7da;
-          border: 1px solid #f5c6cb;
-        }
-        .icon {
-          height: 26px;
-          width: 26px;
-          border: 2px soild transparent;
-          border-radius: 50%;
-          text-align: center;
-          font-size: 13px;
-          pointer-events: none;
-          transition: all 0.3s ease;
-          line-height: 24px;
-        }
-        .icon.tick {
-          color: #23903c;
-          border-color: #23903c;
-          background: #d4edda;
-        }
-        .icon.cross {
-          color: #dc3545;
-          border-color: #dc3445;
-          background: #f8d7da;
-        }
-        .options.disabled {
-          pointer-events: none;
-        }
-      }
-    }
-
-    .quiz-footer-section {
-      height: 60px;
-      padding: 0 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid lightgrey;
-
-      .quiz-footer-text {
-        .highlighted-text {
-          font-weight: 500;
-          padding: 0 5px;
-        }
-      }
-
-      .nextBtn {
-        height: 40px;
-        padding: 0 13px;
-        font-size: 18px;
-        font-weight: 400;
-        cursor: pointer;
-        border: none;
-        outline: none;
-        color: #fff;
-        border-radius: 5px;
-        background: #4A7FA7;
-        border: 1px solid #1A3D63;
-        line-height: 10px;
-        opacity: 0;
-        pointer-events: none;
-        transform: scale(0.95);
-        transition: all 0.3s ease;
-        /* remove and manipulate through JavaScript */
-      }
-      .nextBtn.active {
-        opacity: 1;
-        pointer-events: auto;
-        transform: scale(1);
-        background: #4A7FA7;
-      }
-    }
-  }
-
-  .quiz-box.activeQuizBox {
-    /* * remove later */
-    opacity: 1;
-    z-index: 5;
-    pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  .result-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
-    background: #ffffff;
-    border-radius: 5px;
+/* FIX 1: Overrides for better sizing and spacing on screens up to 600px */
+@media (max-width: 600px) {
+  /* Set body to full-screen alignment for mobile quiz view */
+  body {
+    background: linear-gradient(135deg, #0a66c2, #004182);
     display: flex;
-    padding: 25px 30px;
-    width: 450px;
-    align-items: center;
-    flex-direction: column;
     justify-content: center;
-    transform: translate(-50%, -50%) scale(0.9);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-
-    /* opacity: 1;
-    z-index: 5;
-    pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1); */
-
-    .crownIcon {
-      font-weight: 900;
-      font-size: 100px;
-      color: #F3AA20;
-    }
-
-    .completedText {
-      font-size: 20px;
-      font-weight: 500;
-    }
-
-    .score_text {
-      span {
-        display: flex;
-        margin: 10px 0;
-        font-size: 18px;
-        font-weight: 500;
-      }
-      p {
-        padding: 0 4px;
-        font-weight: 600;
-      }
-    }
-
-    .result-box-buttons-container {
-      display: flex;
-      margin: 20px 0;
-
-      button {
-        margin: 0 10px;
-        height: 45px;
-        padding: 0 20px;
-        font-size: 18px;
-        font-weight: 500;
-        cursor: pointer;
-        border: none;
-        outline: none;
-        border-radius: 5px;
-        border: 1px solid #0A1931;
-        transition: all 0.3s ease;
-      }
-
-      .replay_Quiz {
-        color: #fff;
-        background: #4A7FA7;
-      }
-      .quit {
-        color: #1A3D63;
-        background: #fff;
-      }
-      
-    }
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    color: #000;
   }
 
+  /* Make the quiz-box truly full-screen on mobile */
+  .quiz-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: none;
+    height: 100%; /* CRITICAL: Ensures full height */
+    min-height: 100vh;
+    top: 0;
+    left: 0;
+    transform: none; /* CRITICAL: Removes the desktop translate(-50%, -50%) */
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    backdrop-filter: none;
+    padding: 0; /* Ensures the box itself has no outer padding */
+  }
+
+  /* Ensure active state is also overridden */
+  .quiz-box.activeQuizBox {
+    transform: none; /* Overrides the scale(1) and centering translate */
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+  }
+
+  /* Info and Result boxes should still be centered pop-ups, but now with 95% width */
+  .infoBox,
+  .result-box {
+    width: 95%;
+    padding: 20px; /* Reduced overall padding for small screens */
+  }
+
+  /* Restore body centering for Info/Result boxes when they are active */
+  .infoBox.activeInfoBox,
   .result-box.activeResultBox {
-    opacity: 1;
-    z-index: 5;
-    pointer-events: auto;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* Adjust quiz sections and footer to be mobile-friendly */
+  @media (max-width: 600px) {
+    /* ... (Existing full-screen fixes) ... */
+
+    /* * FIX: Reduce padding across all internal quiz sections
+     * This ensures content doesn't hit the edges and stays centered visually 
+     * within the reduced space.
+     */
+    .quiz-box .quiz-content-section,
+    .quiz-box .quiz-footer-section,
+    .quiz-box .quiz-header-section .quiz-titleContainer {
+      padding-left: 15px; /* Use 15px instead of 30px */
+      padding-right: 15px; /* Use 15px instead of 30px */
+      border-radius: 0;
+    }
+
+    /* Ensure the question text has enough space */
+    .quiz-box .quiz-content-section {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    /* Tweak the footer to stack elements correctly */
+    .quiz-box .quiz-footer-section {
+      flex-direction: column; /* Force the footer text and next button to stack */
+      height: auto;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      gap: 10px;
+    }
+
+    .quiz-box .quiz-footer-section .nextBtn {
+      width: 100%; /* Make the next button full width when stacked */
+      font-size: 16px;
+    }
+
+    /* Fix option list spacing */
+    .quiz-box .options-list-container {
+      padding: 15px 0;
+    }
+  }
+  /* General button and element adjustments */
+  .startButton button {
+    font-size: 20px;
+    padding: 12px 30px;
+  }
+
+  .result-box .result-box-buttons-container button {
+    width: 100%;
+    font-size: 16px;
   }
 }
 
+/* FIX 2: Further adjustments for very small screens */
+/* --- Fix: Ensure full-screen behavior and proper content spacing on very small screens --- */
+@media (max-width: 400px) {
+    /* 1. Ensure Body & Main Quiz Box maintain full screen */
+    body {
+        /* Keep body simple/flexible, let the quiz-box do the work */
+    }
+
+    .quiz-box {
+        width: 100%;
+        max-width: none;
+        height: 100vh;
+        min-height: 100vh;
+        top: 0;
+        left: 0;
+        transform: none; /* CRITICAL: Remove any remaining centering transforms */
+        border-radius: 0;
+    }
+    
+    /* 2. Re-apply Mobile Padding for all Content Sections */
+    .quiz-box .quiz-content-section,
+    .quiz-box .quiz-footer-section,
+    .quiz-box .quiz-header-section .quiz-titleContainer {
+        padding-left: 10px; /* Reduced to 10px for ultra-small screens */
+        padding-right: 10px;
+    }
+
+    /* 3. Tweak internal element sizes */
+    .quiz-box header .quiz-title {
+        font-size: 16px; /* Adjusted title size */
+    }
+
+    .quiz-box .quiz-content-section .questionText {
+        font-size: 18px; /* Adjusted question text size */
+    }
+    
+    .quiz-box .options-list-container .options {
+        padding: 8px 10px; /* Reduced option padding */
+        font-size: 14px;
+    }
+
+    /* Tweak Timeline container for spacing */
+    @media (max-width: 400px) {
+    /* ... (Existing full-screen fixes and padding reductions) ... */
+
+    /* Timeline container FIXES */
+    .quiz-box .quiz-titleContainer .timelineContainer {
+        width: 110px; /* Reduced overall width for space */
+        height: 30px;
+        padding: 0 4px; /* Reduced internal padding */
+        
+        /* Ensures the content within the container doesn't wrap */
+        white-space: nowrap; 
+    }
+    
+    .quiz-box .quiz-titleContainer .timelineContainer .time-line-title {
+        font-size: 13px; /* Slightly smaller text */
+        margin-right: 2px;
+        min-width: 60px; /* Add a small margin to separate text and number */
+    }
+    
+    .quiz-box .quiz-titleContainer .timelineContainer .timeline {
+        width: 25px; /* Reduced width for the number bubble */
+        height: 20px;
+        line-height: 20px;
+        font-size: 14px;
+        padding: 0; /* Remove any padding */
+    }
+
+    /* ... (Rest of your 400px styles) ... */
+}
+
+    /* Result Box adjustments */
+    .result-box .score-text span {
+        font-size: 16px;
+    }
+    
+    .result-box .result-box-buttons-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .result-box .result-box-buttons-container button {
+        width: 100%;
+        margin: 0; /* Remove horizontal margin */
+    }
+}

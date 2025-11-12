@@ -35,10 +35,13 @@ console.log(startBtn);
 startBtn.addEventListener("click", () => {
   // we have to inject a class name to info box
   infoBox.classList.add("activeInfoBox");
+  startBtn.style.display = 'none';
 });
 
 exitBtn.addEventListener("click", () => {
   infoBox.classList.remove("activeInfoBox");
+
+  startBtn.style.display = 'block';
 });
 
 continueBtn.addEventListener("click", () => {
@@ -76,6 +79,10 @@ nextBtn.addEventListener("click", () => {
 quitQuiz.addEventListener('click', ()=>{
   restart();
   resultBox.classList.remove('activeResultBox');
+
+  if (startBtn) {
+    startBtn.style.display = 'block';
+  }
 });
 
 replayQuiz.addEventListener('click', ()=> {
